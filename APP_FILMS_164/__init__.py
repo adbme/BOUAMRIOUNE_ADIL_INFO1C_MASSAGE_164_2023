@@ -15,6 +15,11 @@ try:
         PASS_MYSQL = obj_env("PASS_MYSQL")
         PORT_MYSQL = int(obj_env("PORT_MYSQL"))
         NAME_BD_MYSQL = obj_env("NAME_BD_MYSQL")
+
+        # HOST_MYSQL = obj_env("localhost")
+        # USER_MYSQL = obj_env("root")
+        # PASS_MYSQL = obj_env("")
+        # PORT_MYSQL = int(obj_env("3306"))
         NAME_FILE_DUMP_SQL_BD = obj_env("NAME_FILE_DUMP_SQL_BD")
 
         ADRESSE_SRV_FLASK = obj_env("ADRESSE_SRV_FLASK")
