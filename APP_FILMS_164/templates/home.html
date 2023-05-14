@@ -14,6 +14,62 @@
 				<li class="list-item">
 					Lire le readme.md
 				</li>
+                <li class="list-item">
+                    <a href="form/form.html">form</a>
+                </li>
+
+                <form id="myForm">
+  <div>
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" name="nom" required>
+  </div>
+  <div>
+    <label for="prenom">Prénom :</label>
+    <input type="text" id="prenom" name="prenom" required>
+  </div>
+  <div>
+    <label for="tel">Téléphone :</label>
+    <input type="tel" id="tel" name="tel">
+  </div>
+  <div>
+    <label for="email">Email :</label>
+    <input type="email" id="email" name="email">
+  </div>
+  <div>
+    <label for="nom_technique">Nom technique :</label>
+    <select id="nom_technique" name="nom_technique" required>
+      <option value="">Sélectionnez un titre</option>
+      <option value="Titre 1">Titre 1</option>
+      <option value="Titre 2">Titre 2</option>
+      <option value="Titre 3">Titre 3</option>
+      <option value="Titre 4">Titre 4</option>
+    </select>
+  </div>
+  <div>
+    <label for="date">Date :</label>
+    <input type="date" id="date" name="date" required>
+  </div>
+  <div>
+    <label for="heure">Heure :</label>
+    <input type="time" id="heure" name="heure" required>
+  </div>
+  <button type="submit">Envoyer</button>
+</form>
+<script>
+    const form = document.getElementById('myForm');
+
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+  const formData = new FormData(form);
+  const formObject = {};
+  for (let [key, value] of formData.entries()) {
+    formObject[key] = value;
+  }
+  console.log(formObject);
+});
+
+</script>
+
 			</ul>
 		</div>
 	</div>
