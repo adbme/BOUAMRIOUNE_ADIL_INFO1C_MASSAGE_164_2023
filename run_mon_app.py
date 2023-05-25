@@ -1,12 +1,13 @@
 """Point de départ de l'application
 Fichier : run_mon_app.py
 Auteur : OM 2023.03.25
-
 Définition et paramètres du microframework FLASK
 
 Exemples : https://flask.palletsprojects.com/en/2.1.x/quickstart/#a-minimal-application
 
 """
+
+from flask import request
 
 from APP_FILMS_164 import app
 from APP_FILMS_164 import SECRET_KEY_FLASK
@@ -20,6 +21,18 @@ ne PAS cliquer sur le lien ci-dessous, car c'est bien expliqué.
 https://developer.mozilla.org/fr/docs/Web/HTTP/CORS
 """
 CORS(app)
+@app.route('/hello', methods=['POST'])
+def hello():
+    # print(request.form)
+
+    sql = "INSERT INTO `users` (`email`, `password`) VALUES (%s, %s)"
+    cursor.execute(sql, ('webmaster@python.org', 'very-secret'))
+
+    nom=request.form.get('nom')
+    prenom = request.form.get('prenom')
+    nomtest = """INSERT INTO personne (test, adil) VALUES (NULL,%(value_intitule_genre)s) """
+    return 'hello'
+
 
 if __name__ == '__main__':
     # OM 2023.03.25

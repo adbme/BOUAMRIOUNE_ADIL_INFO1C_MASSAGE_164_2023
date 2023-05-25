@@ -1,19 +1,59 @@
-<!DOCTYPE html>
-<html>
-<body>
-
-<h2>HTML Forms</h2>
-
-<form action="/">
-  <label for="fname">First name:</label><br>
-  <input type="text" id="fname" name="fname" value="John"><br>
-  <label for="lname">Last name:</label><br>
-  <input type="text" id="lname" name="lname" value="Doe"><br><br>
-  <input type="submit" value="Submit">
+<form id="myForm" method="post" action="/hello">
+  <div>
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" name="nom" required>
+  </div>
+  <div>
+    <label for="prenom">Prénom :</label>
+    <input type="text" id="prenom" name="prenom" required>
+  </div>
+  <div>
+    <span>Moyen de contact :</span>
+    <div>
+      <input type="radio" id="tel" name="moyen_contact" value="tel" required>
+      <label for="tel">Téléphone</label>
+    </div>
+    <div>
+      <input type="radio" id="email" name="moyen_contact" value="email" required>
+      <label for="email">Email</label>
+    </div>
+  </div>
+  <div>
+    <label for="contact">Contact :</label>
+    <input type="text" id="contact" name="contact" required>
+  </div>
+  <div>
+    <label for="nom_technique">Nom technique :</label>
+    <select id="nom_technique" name="nom_technique" required>
+      <option value="">Sélectionnez un titre</option>
+      <option value="Titre 1">Titre 1</option>
+      <option value="Titre 2">Titre 2</option>
+      <option value="Titre 3">Titre 3</option>
+      <option value="Titre 4">Titre 4</option>
+    </select>
+  </div>
+  <div>
+    <label for="date">Date :</label>
+    <input type="date" id="date" name="date" required>
+  </div>
+  <div>
+    <label for="heure">Heure :</label>
+    <input type="time" id="heure" name="heure" required>
+  </div>
+  <button type="submit">Envoyer</button>
 </form>
 
-<p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
+<script>
+    const form = document.getElementById('myForm');
 
-</body>
-</html>
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+  const formData = new FormData(form);
+  const formObject = {};
+  for (let [key, value] of formData.entries()) {
+    formObject[key] = value;
+  }
+  console.log(formObject);
+});
 
+</script>
