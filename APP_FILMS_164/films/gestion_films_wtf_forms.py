@@ -24,6 +24,9 @@ class FormWTFAddFilm(FlaskForm):
                                                                               "d'espace à double, de double "
                                                                               "apostrophe, de double trait union")
                                                                ])
+    inputDate = DateField("date")
+
+
 
     submit = SubmitField("Enregistrer film")
 

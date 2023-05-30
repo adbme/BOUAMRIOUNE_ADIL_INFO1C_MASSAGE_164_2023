@@ -18,6 +18,13 @@
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
 					</p>
+                <p>
+                    {{ form_add_film.inputDate.label }}<br>
+						{{ form_add_film.inputDate(size=32) }}<br>
+						{% for error in form_add_film.inputDate.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
+                </p>
 					Voilà c'est juste pour vous montrer l'ossature du projet je n'ai pas tout fait...
 				</div>
 				{{ form_add_film.submit(class="btn btn-primary") }}

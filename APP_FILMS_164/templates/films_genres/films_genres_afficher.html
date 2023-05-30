@@ -11,20 +11,15 @@
 						  Id
 						</th>
 						<th class="" >
-						  Nom
+						  Date de prise de rdv
 						</th>
-						<th class="" >
-						  Durée
+                        <th class="" >
+						  Heure de prise de rdv
 						</th>
-						<th class="" >
-						  Date de sortie
+                        <th class="" >
+						  Fk personne
 						</th>
-						<th class="" >
-						  Description
-						</th>
-						<th class="" >
-						  Affiche
-						</th>
+
 					</tr>
 				</thead>
 			{% endif %}
@@ -32,23 +27,19 @@
 			<tbody>
 				<tr>
 					  <th class="align-middle">
-						  {{ row.fk_personne }}
+						  {{ row.id }}
 					  </th>
 					  <th class="align-middle">
 						{{ row.date_prendre_rdv }}
 					  </th>
-					  <th class="align-middle">
-						{{ row.duree_film|default("", True) }}
+                     <th class="align-middle">
+						  {{ row.heure_prendre_rdv }}
 					  </th>
 					  <th class="align-middle">
-						{{ row.date_sortie_film|default("", True) }}
+						{{ row.fk_personne}}
 					  </th>
-					  <th class="align-middle">
-						{{ row.description_film|default("", True) }}
-					  </th>
-					  <th class="align-middle">
-						<img class="img" src={{ row.cover_link_film|default(None, True) }} style="border: 0;display:block; width:150px; max-height:auto;"  alt = "image masquée FFP8 (in COVID-19 Memory) (absente) mod 164">
-					  </th>
+
+
 					  <th class="align-middle">
 						<a class="btn btn-primary" href="{{ url_for('film_add_wtf') }}" role="button">Ajouter</a>
 					  </th>
