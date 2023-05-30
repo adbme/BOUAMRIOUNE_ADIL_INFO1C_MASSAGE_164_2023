@@ -9,7 +9,7 @@
 			</p>
 			<form action="" method="POST" novalidate>
 				<!-- Protection contre les attaques Cross-Site Request Forgery (CSRF) -->
-				{{ form.hidden_tag() }}
+                    {{ form.hidden_tag() }}
 				<div class="form-group">
 					<p>
 						{{ form.nom_genre_wtf.label }}<br>
