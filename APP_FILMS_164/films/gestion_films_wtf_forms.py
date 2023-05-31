@@ -3,8 +3,10 @@ Fichier : gestion_films_wtf_forms.py
 Auteur : OM 2022.04.11
 
 """
+import datetime
+
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, DateField
+from wtforms import StringField, IntegerField, DateField, TimeField
 from wtforms import SubmitField
 from wtforms.validators import Length, InputRequired, NumberRange, DataRequired
 from wtforms.validators import Regexp
@@ -25,8 +27,8 @@ class FormWTFAddFilm(FlaskForm):
                                                                               "apostrophe, de double trait union")
                                                                ])
     inputDate = DateField("date")
-
-
+    inputTime = TimeField("hour")
+    inputInt = IntegerField("fk")
 
     submit = SubmitField("Enregistrer film")
 
