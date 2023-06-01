@@ -266,10 +266,10 @@ def genre_delete_wtf():
             print(id_genre_delete, type(id_genre_delete))
 
             # Requête qui affiche tous les films_genres qui ont le genre que l'utilisateur veut effacer
-            str_sql_genres_films_delete = """SELECT id_genre_film, date_prendre_rdv, id_genre, intitule_genre FROM personne_film 
-                                            INNER JOIN prendre_rdv ON personne_film.fk_film = prendre_rdv.fk_personne
-                                            INNER JOIN personne ON personne_film.fk_genre = personne.id_genre
-                                            WHERE fk_genre = %(value_id_genre)s"""
+            str_sql_genres_films_delete = """SELECT id_personne, nom_personne, prenom_personne, fk_mail, fk_tel FROM personne
+                                            INNER JOIN tel ON personne.fk_tel = tel.id_tel
+                                            INNER JOIN mail ON personne.fk_mail = mail.id_mail
+                                            WHERE fk_mail = %(value_id_genre)s"""
 
             with DBconnection() as mydb_conn:
                 mydb_conn.execute(str_sql_genres_films_delete, valeur_select_dictionnaire)
@@ -281,7 +281,7 @@ def genre_delete_wtf():
                 session['data_films_attribue_genre_delete'] = data_films_attribue_genre_delete
 
                 # Opération sur la BD pour récupérer "id_genre" et "intitule_genre" de la "personne"
-                str_sql_id_genre = "SELECT id_genre, intitule_genre FROM personne WHERE id_genre = %(value_id_genre)s"
+                str_sql_id_genre = "SELECT id_tel, num_tel FROM tel WHERE id_tel = %(value_id_genre)s"
 
                 mydb_conn.execute(str_sql_id_genre, valeur_select_dictionnaire)
                 # Une seule valeur est suffisante "fetchone()",

@@ -35,12 +35,16 @@ def film_add_wtf():
     if request.method == "POST":
         try:
             if form_add_film.validate_on_submit():
-                nom_film_add = form_add_film.nom_film_add_wtf.data
 
-                valeurs_insertion_dictionnaire = {"value_nom_film": nom_film_add}
+                inputDate = form_add_film.inputDate.data
+                inputTime = form_add_film.inputTime.data
+                inputInt = form_add_film.inputInt.data
+
+                valeurs_insertion_dictionnaire = {"value_nom_film": inputDate,
+                                                  "value_nom_film": inputTime, "value_nom_film": inputInt}
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
-                strsql_insert_film = """INSERT INTO prendre_rdv (fk_personne,date_prendre_rdv) VALUES (NULL,%(value_nom_film)s) """
+                strsql_insert_film = """INSERT INTO personne (date_prendre_rdv, heure_prendre_rdv, fk_personne) VALUES (NULL,%(value_nom_film)s) """
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_insert_film, valeurs_insertion_dictionnaire)
 
@@ -163,6 +167,7 @@ def film_delete_wtf():
     btn_submit_del = None
     # L'utilisateur vient de cliquer sur le bouton "DELETE". Récupère la valeur de "fk_personne"
     id_film_delete = request.values['id_film_btn_delete_html']
+    print("le boutton est", id_film_delete)
 
     # Objet formulaire pour effacer le film sélectionné.
     form_delete_film = FormWTFDeleteFilm()
@@ -175,7 +180,9 @@ def film_delete_wtf():
             # Récupère les données afin d'afficher à nouveau
             # le formulaire "films/film_delete_wtf.html" lorsque le bouton "Etes-vous sur d'effacer ?" est cliqué.
             data_film_delete = session['data_film_delete']
-            print("data_film_delete ", data_film_delete)
+            print("C UN TEST ", data_film_delete)
+
+
 
             flash(f"Effacer le film de façon définitive de la BD !!!", "danger")
             # L'utilisateur vient de cliquer sur le bouton de confirmation pour effacer...
@@ -184,16 +191,17 @@ def film_delete_wtf():
 
         # L'utilisateur a vraiment décidé d'effacer.
         if form_delete_film.submit_btn_del_film.data:
+            print("delete film")
             valeur_delete_dictionnaire = {"value_id_film": id_film_delete}
             print("valeur_delete_dictionnaire ", valeur_delete_dictionnaire)
 
-            str_sql_delete_fk_film_genre = """DELETE FROM t_genre_film WHERE fk_film = %(value_id_film)s"""
-            str_sql_delete_film = """DELETE FROM prendre_rdv WHERE fk_personne = %(value_id_film)s"""
+            # str_sql_delete_fk_film_genre = """DELETE FROM prendre_rdv WHERE WHERE id = %s"""
+            str_sql_delete_film = """DELETE FROM prendre_rdv WHERE id = %s"""
             # Manière brutale d'effacer d'abord la "fk_film", même si elle n'existe pas dans la "t_genre_film"
             # Ensuite on peut effacer le film vu qu'il n'est plus "lié" (INNODB) dans la "t_genre_film"
             with DBconnection() as mconn_bd:
-                mconn_bd.execute(str_sql_delete_fk_film_genre, valeur_delete_dictionnaire)
-                mconn_bd.execute(str_sql_delete_film, valeur_delete_dictionnaire)
+                # mconn_bd.execute(str_sql_delete_fk_film_genre, valeur_delete_dictionnaire)
+                mconn_bd.execute(str_sql_delete_film, int(id_film_delete))
 
             flash(f"Film définitivement effacé !!", "success")
             print(f"Film définitivement effacé !!")
@@ -205,10 +213,11 @@ def film_delete_wtf():
             print(id_film_delete, type(id_film_delete))
 
             # Requête qui affiche le film qui doit être efffacé.
-            str_sql_genres_films_delete = """SELECT * FROM prendre_rdv"""
+            id = int(id_film_delete)
+            str_sql_genres_films_delete = """SELECT * FROM prendre_rdv WHERE id = %s"""
 
             with DBconnection() as mydb_conn:
-                mydb_conn.execute(str_sql_genres_films_delete, valeur_select_dictionnaire)
+                mydb_conn.execute(str_sql_genres_films_delete, id)
                 data_film_delete = mydb_conn.fetchall()
                 print("data_film_delete...", data_film_delete)
 
