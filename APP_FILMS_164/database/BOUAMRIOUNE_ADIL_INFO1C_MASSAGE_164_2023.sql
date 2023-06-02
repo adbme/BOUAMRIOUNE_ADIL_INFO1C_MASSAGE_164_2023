@@ -43,8 +43,8 @@ INSERT INTO `mail` (`id_mail`, `adresse_mail`) VALUES
 	(4, 'sarah@example.com');
 /*!40000 ALTER TABLE `mail` ENABLE KEYS */;
 
--- Listage de la structure de table bouamrioune_adil_info1c_massage_164_2023. personne
-CREATE TABLE IF NOT EXISTS `personne` (
+-- Listage de la structure de table bouamrioune_adil_info1c_massage_164_2023. t_personne
+CREATE TABLE IF NOT EXISTS `t_personne` (
   `id_personne` int NOT NULL AUTO_INCREMENT,
   `nom_personne` varchar(50) DEFAULT NULL,
   `prenom_personne` varchar(50) DEFAULT NULL,
@@ -55,17 +55,17 @@ CREATE TABLE IF NOT EXISTS `personne` (
   KEY `fk_tel` (`fk_tel`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table bouamrioune_adil_info1c_massage_164_2023.personne : 4 rows
-/*!40000 ALTER TABLE `personne` DISABLE KEYS */;
-INSERT INTO `personne` (`id_personne`, `nom_personne`, `prenom_personne`, `fk_mail`, `fk_tel`) VALUES
+-- Listage des données de la table bouamrioune_adil_info1c_massage_164_2023.t_personne : 4 rows
+/*!40000 ALTER TABLE `t_personne` DISABLE KEYS */;
+INSERT INTO `t_personne` (`id_personne`, `nom_personne`, `prenom_personne`, `fk_mail`, `fk_tel`) VALUES
 	(1, 'david', 'lescramptés', 1, 1),
 	(2, 'doe', 'jone', 2, 2),
 	(3, 'mike', 'larue', 3, 3),
 	(4, 'sarah', 'hmara', 4, 4);
-/*!40000 ALTER TABLE `personne` ENABLE KEYS */;
+/*!40000 ALTER TABLE `t_personne` ENABLE KEYS */;
 
--- Listage de la structure de table bouamrioune_adil_info1c_massage_164_2023. prendre_rdv
-CREATE TABLE IF NOT EXISTS `prendre_rdv` (
+-- Listage de la structure de table bouamrioune_adil_info1c_massage_164_2023. t_prendre_rdv
+CREATE TABLE IF NOT EXISTS `t_prendre_rdv` (
   `id` int NOT NULL AUTO_INCREMENT,
   `date_prendre_rdv` date NOT NULL,
   `heure_prendre_rdv` time NOT NULL,
@@ -74,14 +74,14 @@ CREATE TABLE IF NOT EXISTS `prendre_rdv` (
   KEY `fk_personne` (`fk_personne`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table bouamrioune_adil_info1c_massage_164_2023.prendre_rdv : 4 rows
-/*!40000 ALTER TABLE `prendre_rdv` DISABLE KEYS */;
-INSERT INTO `prendre_rdv` (`id`, `date_prendre_rdv`, `heure_prendre_rdv`, `fk_personne`) VALUES
+-- Listage des données de la table bouamrioune_adil_info1c_massage_164_2023.t_prendre_rdv : 4 rows
+/*!40000 ALTER TABLE `t_prendre_rdv` DISABLE KEYS */;
+INSERT INTO `t_prendre_rdv` (`id`, `date_prendre_rdv`, `heure_prendre_rdv`, `fk_personne`) VALUES
 	(1, '2023-06-02', '10:00:00', 1),
 	(2, '2023-06-03', '14:30:00', 2),
 	(3, '2023-06-04', '16:45:00', 3),
 	(4, '2023-06-05', '12:02:00', 4);
-/*!40000 ALTER TABLE `prendre_rdv` ENABLE KEYS */;
+/*!40000 ALTER TABLE `t_prendre_rdv` ENABLE KEYS */;
 
 -- Listage de la structure de table bouamrioune_adil_info1c_massage_164_2023. tel
 CREATE TABLE IF NOT EXISTS `tel` (

@@ -34,20 +34,20 @@ def genres_afficher(order_by, id_genre_sel):
         try:
             with DBconnection() as mc_afficher:
                 if order_by == "ASC" and id_genre_sel == 0:
-                    strsql_genres_afficher = """SELECT * FROM personne"""
+                    strsql_genres_afficher = """SELECT * FROM t_personne"""
                     mc_afficher.execute(strsql_genres_afficher)
                 elif order_by == "ASC":
                     # C'EST LA QUE VOUS ALLEZ DEVOIR PLACER VOTRE PROPRE LOGIQUE MySql
-                    # la commande MySql classique est "SELECT * FROM personne"
+                    # la commande MySql classique est "SELECT * FROM t_personne"
                     # Pour "lever"(raise) une erreur s'il y a des erreurs sur les noms d'attributs dans la table
                     # donc, je précise les champs à afficher
                     # Constitution d'un dictionnaire pour associer l'id du genre sélectionné avec un nom de variable
                     valeur_id_genre_selected_dictionnaire = {"value_id_genre_selected": id_genre_sel}
-                    strsql_genres_afficher = """SELECT * FROM personne"""
+                    strsql_genres_afficher = """SELECT * FROM t_personne"""
 
                     mc_afficher.execute(strsql_genres_afficher, valeur_id_genre_selected_dictionnaire)
                 else:
-                    strsql_genres_afficher = """SELECT * FROM personne"""
+                    strsql_genres_afficher = """SELECT * FROM t_personne"""
 
                     mc_afficher.execute(strsql_genres_afficher)
 
@@ -57,12 +57,12 @@ def genres_afficher(order_by, id_genre_sel):
 
                 # Différencier les messages si la table est vide.
                 if not data_genres and id_genre_sel == 0:
-                    flash("""La table "personne" est vide. !!""", "warning")
+                    flash("""La table "t_personne" est vide. !!""", "warning")
                 elif not data_genres and id_genre_sel > 0:
                     # Si l'utilisateur change l'id_genre dans l'URL et que le genre n'existe pas,
                     flash(f"Le genre demandé n'existe pas !!", "warning")
                 else:
-                    # Dans tous les autres cas, c'est que la table "personne" est vide.
+                    # Dans tous les autres cas, c'est que la table "t_personne" est vide.
                     # OM 2020.04.09 La ligne ci-dessous permet de donner un sentiment rassurant aux utilisateurs.
                     flash(f"Données genres affichés !!", "success")
 
@@ -106,7 +106,7 @@ def genres_ajouter_wtf():
                 valeurs_insertion_dictionnaire = {"value_intitule_genre": name_genre}
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
-                strsql_inserpersonne = """INSERT INTO personne (id_personne, nom_personne) VALUES (NULL,%(value_intitule_genre)s) """
+                strsql_inserpersonne = """INSERT INTO t_personne (id_personne, nom_personne) VALUES (NULL,%(value_intitule_genre)s) """
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_inserpersonne, valeurs_insertion_dictionnaire)
 
@@ -166,7 +166,7 @@ def genre_update_wtf():
                                           }
             print("valeur_update_dictionnaire ", valeur_update_dictionnaire)
 
-            str_sql_update_intitulegenre = """UPDATE personne SET id_personne = %(value_name_genre)s, 
+            str_sql_update_intitulegenre = """UPDATE t_personne SET id_personne = %(value_name_genre)s, 
             id_personne = %(value_date_genre_essai)s WHERE nom_personne = %(value_id_genre)s """
             with DBconnection() as mconn_bd:
                 mconn_bd.execute(str_sql_update_intitulegenre, valeur_update_dictionnaire)
@@ -178,8 +178,8 @@ def genre_update_wtf():
             # Affiche seulement la valeur modifiée, "ASC" et l'"id_genre_update"
             return redirect(url_for('genres_afficher', order_by="ASC", id_genre_sel=id_genre_update))
         elif request.method == "GET":
-            # Opération sur la BD pour récupérer "id_genre" et "intitule_genre" de la "personne"
-            str_sql_id_genre = "SELECT id_personne FROM personne " \
+            # Opération sur la BD pour récupérer "id_genre" et "intitule_genre" de la "t_personne"
+            str_sql_id_genre = "SELECT id_personne FROM t_personne " \
                                "WHERE nom_personne = %(value_id_genre)s"
             valeur_select_dictionnaire = {"value_id_genre": id_genre_update}
             with DBconnection() as mybd_conn:
@@ -247,8 +247,8 @@ def genre_delete_wtf():
                 valeur_delete_dictionnaire = {"value_id_genre": id_genre_delete}
                 print("valeur_delete_dictionnaire ", valeur_delete_dictionnaire)
 
-                str_sql_delete_films_genre = """DELETE FROM personne WHERE id_personne = %(value_id_genre)s"""
-                str_sql_delete_idgenre = """DELETE FROM personne WHERE id_personne = %(value_id_genre)s"""
+                str_sql_delete_films_genre = """DELETE FROM t_personne WHERE id_personne = %(value_id_genre)s"""
+                str_sql_delete_idgenre = """DELETE FROM t_personne WHERE id_personne = %(value_id_genre)s"""
                 # Manière brutale d'effacer d'abord la "fk_genre", même si elle n'existe pas dans la "personne_film"
                 # Ensuite on peut effacer le genre vu qu'il n'est plus "lié" (INNODB) dans la "personne_film"
                 with DBconnection() as mconn_bd:
@@ -266,9 +266,9 @@ def genre_delete_wtf():
             print(id_genre_delete, type(id_genre_delete))
 
             # Requête qui affiche tous les films_genres qui ont le genre que l'utilisateur veut effacer
-            str_sql_genres_films_delete = """SELECT id_personne, nom_personne, prenom_personne, fk_mail, fk_tel FROM personne
-                                            INNER JOIN tel ON personne.fk_tel = tel.id_tel
-                                            INNER JOIN mail ON personne.fk_mail = mail.id_mail
+            str_sql_genres_films_delete = """SELECT id_personne, nom_personne, prenom_personne, fk_mail, fk_tel FROM t_personne
+                                            INNER JOIN tel ON t_personne.fk_tel = tel.id_tel
+                                            INNER JOIN mail ON t_personne.fk_mail = mail.id_mail
                                             WHERE fk_mail = %(value_id_genre)s"""
 
             with DBconnection() as mydb_conn:
@@ -280,7 +280,7 @@ def genre_delete_wtf():
                 # le formulaire "genres/genre_delete_wtf.html" lorsque le bouton "Etes-vous sur d'effacer ?" est cliqué.
                 session['data_films_attribue_genre_delete'] = data_films_attribue_genre_delete
 
-                # Opération sur la BD pour récupérer "id_genre" et "intitule_genre" de la "personne"
+                # Opération sur la BD pour récupérer "id_genre" et "intitule_genre" de la "t_personne"
                 str_sql_id_genre = "SELECT id_tel, num_tel FROM tel WHERE id_tel = %(value_id_genre)s"
 
                 mydb_conn.execute(str_sql_id_genre, valeur_select_dictionnaire)

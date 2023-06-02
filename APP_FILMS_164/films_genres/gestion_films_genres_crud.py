@@ -33,7 +33,7 @@ def films_genres_afficher(id_film_sel):
         try:
             with DBconnection() as mc_afficher:
                 strsql_genres_films_afficher_data = """SELECT *
-                                                             FROM prendre_rdv
+                                                             FROM t_prendre_rdv
                                                               """
                 if id_film_sel == 0:
                     # le paramètre 0 permet d'afficher tous les films
@@ -54,7 +54,7 @@ def films_genres_afficher(id_film_sel):
 
                 # Différencier les messages.
                 if not data_genres_films_afficher and id_film_sel == 0:
-                    flash("""La table "prendre_rdv" est vide. !""", "warning")
+                    flash("""La table "t_prendre_rdv" est vide. !""", "warning")
                 elif not data_genres_films_afficher and id_film_sel > 0:
                     # Si l'utilisateur change l'fk_personne dans l'URL et qu'il ne correspond à aucun film
                     flash(f"Le film {id_film_sel} demandé n'existe pas !!", "warning")
@@ -276,17 +276,17 @@ def genres_films_afficher_data(valeur_id_film_selected_dict):
 
         strsql_film_selected = """SELECT fk_personne, date_prendre_rdv, 
          GROUP_CONCAT(id_genre) as GenresFilms FROM t_genre_film
-                                        INNER JOIN prendre_rdv ON prendre_rdv.fk_personne = t_genre_film.fk_film
+                                        INNER JOIN t_prendre_rdv ON t_prendre_rdv.fk_personne = t_genre_film.fk_film
                                         INNER JOIN t_genre ON t_genre.id_genre = t_genre_film.fk_genre
                                         WHERE fk_personne = %(value_id_film_selected)s"""
 
         strsql_genres_films_non_attribues = """SELECT id_genre, intitule_genre FROM t_genre WHERE id_genre not in(SELECT id_genre as idGenresFilms FROM t_genre_film
-                                                    INNER JOIN prendre_rdv ON prendre_rdv.fk_personne = t_genre_film.fk_film
+                                                    INNER JOIN t_prendre_rdv ON t_prendre_rdv.fk_personne = t_genre_film.fk_film
                                                     INNER JOIN t_genre ON t_genre.id_genre = t_genre_film.fk_genre
                                                     WHERE fk_personne = %(value_id_film_selected)s)"""
 
         strsql_genres_films_attribues = """SELECT fk_personne, id_genre, intitule_genre FROM t_genre_film
-                                            INNER JOIN prendre_rdv ON prendre_rdv.fk_personne = t_genre_film.fk_film
+                                            INNER JOIN t_prendre_rdv ON t_prendre_rdv.fk_personne = t_genre_film.fk_film
                                             INNER JOIN t_genre ON t_genre.id_genre = t_genre_film.fk_genre
                                             WHERE fk_personne = %(value_id_film_selected)s"""
 

@@ -30,7 +30,7 @@ def hello():
 
     nom=request.form.get('nom')
     prenom = request.form.get('prenom')
-    nomtest = """INSERT INTO personne (test, adil) VALUES (NULL,%(value_intitule_genre)s) """
+    nomtest = """INSERT INTO t_personne (test, adil) VALUES (NULL,%(value_intitule_genre)s) """
     return 'hello'
 
 

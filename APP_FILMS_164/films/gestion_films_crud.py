@@ -44,7 +44,7 @@ def film_add_wtf():
                                                   "value_nom_film": inputTime, "value_nom_film": inputInt}
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
-                strsql_insert_film = """INSERT INTO personne (date_prendre_rdv, heure_prendre_rdv, fk_personne) VALUES (NULL,%(value_nom_film)s) """
+                strsql_insert_film = """INSERT INTO t_personne (date_prendre_rdv, heure_prendre_rdv, fk_personne) VALUES (NULL,%(value_nom_film)s) """
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_insert_film, valeurs_insertion_dictionnaire)
 
@@ -104,7 +104,7 @@ def film_update_wtf():
                                           }
             print("valeur_update_dictionnaire ", valeur_update_dictionnaire)
 
-            str_sql_update_nom_film = """UPDATE prendre_rdv SET date_prendre_rdv = %(value_nom_film)s,
+            str_sql_update_nom_film = """UPDATE t_prendre_rdv SET date_prendre_rdv = %(value_nom_film)s,
                                                            
                                                             description_film = %(value_description_film)s,
                                                             cover_link_film = %(value_cover_link_film)s,
@@ -121,7 +121,7 @@ def film_update_wtf():
             return redirect(url_for('films_genres_afficher', id_film_sel=id_film_update))
         elif request.method == "GET":
             # Opération sur la BD pour récupérer "fk_personne" et "intitule_genre" de la "t_genre"
-            str_sql_id_film = "SELECT * FROM prendre_rdv"
+            str_sql_id_film = "SELECT * FROM t_prendre_rdv"
             valeur_select_dictionnaire = {"value_id_film": id_film_update}
             with DBconnection() as mybd_conn:
                 mybd_conn.execute(str_sql_id_film, valeur_select_dictionnaire)
@@ -195,8 +195,8 @@ def film_delete_wtf():
             valeur_delete_dictionnaire = {"value_id_film": id_film_delete}
             print("valeur_delete_dictionnaire ", valeur_delete_dictionnaire)
 
-            # str_sql_delete_fk_film_genre = """DELETE FROM prendre_rdv WHERE WHERE id = %s"""
-            str_sql_delete_film = """DELETE FROM prendre_rdv WHERE id = %s"""
+            # str_sql_delete_fk_film_genre = """DELETE FROM t_prendre_rdv WHERE WHERE id = %s"""
+            str_sql_delete_film = """DELETE FROM t_prendre_rdv WHERE id = %s"""
             # Manière brutale d'effacer d'abord la "fk_film", même si elle n'existe pas dans la "t_genre_film"
             # Ensuite on peut effacer le film vu qu'il n'est plus "lié" (INNODB) dans la "t_genre_film"
             with DBconnection() as mconn_bd:
@@ -214,7 +214,7 @@ def film_delete_wtf():
 
             # Requête qui affiche le film qui doit être efffacé.
             id = int(id_film_delete)
-            str_sql_genres_films_delete = """SELECT * FROM prendre_rdv WHERE id = %s"""
+            str_sql_genres_films_delete = """SELECT * FROM t_prendre_rdv WHERE id = %s"""
 
             with DBconnection() as mydb_conn:
                 mydb_conn.execute(str_sql_genres_films_delete, id)
