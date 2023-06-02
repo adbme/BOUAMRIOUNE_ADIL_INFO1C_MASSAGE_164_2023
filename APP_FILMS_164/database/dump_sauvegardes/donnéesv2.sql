@@ -4,7 +4,6 @@
 -- SE du serveur:                Win64
 -- HeidiSQL Version:             12.1.0.6537
 -- --------------------------------------------------------
-
 -- Destruction de la BD si elle existe.
   -- Pour être certain d'avoir la dernière version des données
   DROP DATABASE IF EXISTS bouamrioune_adil_info1c_massage_164_2023;
@@ -12,7 +11,6 @@
   CREATE DATABASE IF NOT EXISTS bouamrioune_adil_info1c_massage_164_2023;
   -- Utilisation de cette base de données
   USE bouamrioune_adil_info1c_massage_164_2023;
-
 
 
 -- Listage de la structure de table bouamrioune_adil_info1c_massage_164_2023. t_film
@@ -62,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `t_mail` (
   PRIMARY KEY (`id_mail`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table bouamrioune_adil_info1c_massage_164_2023.t_mail : ~4 rows (environ)
+-- Listage des données de la table bouamrioune_adil_info1c_massage_164_2023.t_mail : ~0 rows (environ)
 INSERT INTO `t_mail` (`id_mail`, `adresse_email`) VALUES
 	(1, 'david@lescramptés'),
 	(2, 'doe.jone@example'),
@@ -84,11 +82,6 @@ CREATE TABLE IF NOT EXISTS `t_personne` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Listage des données de la table bouamrioune_adil_info1c_massage_164_2023.t_personne : ~0 rows (environ)
-INSERT INTO `t_personne` (`id_personne`, `nom_personne`, `prenom_personne`, `fk_mail`, `fk_tel`) VALUES
-	(1, 'david', 'lescramptés', 1, 1),
-	(2, 'doe', 'jone', 2, 2),
-	(3, 'mike', 'larue', 3, 3),
-	(4, 'sarah', 'hmara', 4, 4);
 
 -- Listage de la structure de table bouamrioune_adil_info1c_massage_164_2023. t_prendre_rdv
 CREATE TABLE IF NOT EXISTS `t_prendre_rdv` (
@@ -102,11 +95,6 @@ CREATE TABLE IF NOT EXISTS `t_prendre_rdv` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Listage des données de la table bouamrioune_adil_info1c_massage_164_2023.t_prendre_rdv : ~0 rows (environ)
-INSERT INTO `t_prendre_rdv` (`id`, `date_prendre_rdv`, `heure_prendre_rdv`, `fk_personne`) VALUES
-	(1, '2023-06-02', '10:00:00', 1),
-	(2, '2023-06-03', '14:30:00', 2),
-	(3, '2023-06-04', '16:45:00', 3),
-	(4, '2023-06-05', '12:02:00', 4);
 
 -- Listage de la structure de table bouamrioune_adil_info1c_massage_164_2023. t_tel
 CREATE TABLE IF NOT EXISTS `t_tel` (
@@ -115,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `t_tel` (
   PRIMARY KEY (`id_tel`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table bouamrioune_adil_info1c_massage_164_2023.t_tel : ~4 rows (environ)
+-- Listage des données de la table bouamrioune_adil_info1c_massage_164_2023.t_tel : ~0 rows (environ)
 INSERT INTO `t_tel` (`id_tel`, `num_tel`) VALUES
 	(1, 78444092),
 	(2, 21902102),
