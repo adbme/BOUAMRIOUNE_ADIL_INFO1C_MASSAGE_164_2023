@@ -5,6 +5,14 @@
 -- HeidiSQL Version:             12.1.0.6537
 -- --------------------------------------------------------
 
+ -- Destruction de la BD si elle existe.
+  -- Pour être certain d'avoir la dernière version des données
+  DROP DATABASE IF EXISTS bouamrioune_adil_info1c_massage_164_2023;
+  -- Création d'une nouvelle base de données
+  CREATE DATABASE IF NOT EXISTS bouamrioune_adil_info1c_massage_164_2023;
+  -- Utilisation de cette base de données
+  USE bouamrioune_adil_info1c_massage_164_2023;
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
 /*!50503 SET NAMES utf8mb4 */;
