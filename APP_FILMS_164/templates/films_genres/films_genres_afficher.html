@@ -8,17 +8,12 @@
 				<thead>
 					<tr>
 						<th class="" >
-						  Id
+						  Id service
 						</th>
 						<th class="" >
-						  Date de prise de rdv
+						  Nom technique service
 						</th>
-                        <th class="" >
-						  Heure de prise de rdv
-						</th>
-                        <th class="" >
-						  Fk t_personne
-						</th>
+
 
 					</tr>
 				</thead>
@@ -26,18 +21,14 @@
 			{% for row in data %}
 			<tbody>
 				<tr>
+
 					  <th class="align-middle">
-						  {{ row.id }}
-					  </th>
-					  <th class="align-middle">
-						{{ row.date_prendre_rdv }}
+						{{ row.id_service }}
 					  </th>
                      <th class="align-middle">
-						  {{ row.heure_prendre_rdv }}
+						  {{ row.nom_technique_service }}
 					  </th>
-					  <th class="align-middle">
-						{{ row.fk_personne}}
-					  </th>
+
 
 
 					  <th class="align-middle">

@@ -36,15 +36,13 @@ def film_add_wtf():
         try:
             if form_add_film.validate_on_submit():
 
-                inputDate = form_add_film.inputDate.data
-                inputTime = form_add_film.inputTime.data
-                inputInt = form_add_film.inputInt.data
+                inputName= form_add_film.inputName.data
 
-                valeurs_insertion_dictionnaire = {"value_nom_film": inputDate,
-                                                  "value_nom_film": inputTime, "value_nom_film": inputInt}
+
+                valeurs_insertion_dictionnaire = {"value_nom_film": inputName}
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
-                strsql_insert_film = """INSERT INTO t_personne (date_prendre_rdv, heure_prendre_rdv, fk_personne) VALUES (NULL,%(value_nom_film)s) """
+                strsql_insert_film = """INSERT INTO t_service (nom_technique_service) VALUES (%(value_nom_film)s) """
                 with DBconnection() as mconn_bd:
                     mconn_bd.execute(strsql_insert_film, valeurs_insertion_dictionnaire)
 
@@ -132,7 +130,7 @@ def film_update_wtf():
 
             # Afficher la valeur sélectionnée dans le champ du formulaire "film_update_wtf.html"
             form_update_film.nom_film_update_wtf.data = data_film["date_prendre_rdv"]
-            form_update_film.duree_film_update_wtf.data = data_film["duree_film"]
+
             # Debug simple pour contrôler la valeur dans la console "run" de PyCharm
             print(f" duree film  ", data_film["duree_film"], "  type ", type(data_film["duree_film"]))
             form_update_film.description_film_update_wtf.data = data_film["description_film"]

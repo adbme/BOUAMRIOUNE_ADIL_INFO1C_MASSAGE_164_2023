@@ -33,7 +33,7 @@ def films_genres_afficher(id_film_sel):
         try:
             with DBconnection() as mc_afficher:
                 strsql_genres_films_afficher_data = """SELECT *
-                                                             FROM t_prendre_rdv
+                                                             FROM t_service
                                                               """
                 if id_film_sel == 0:
                     # le paramètre 0 permet d'afficher tous les films
@@ -274,7 +274,7 @@ def genres_films_afficher_data(valeur_id_film_selected_dict):
     print("valeur_id_film_selected_dict...", valeur_id_film_selected_dict)
     try:
 
-        strsql_film_selected = """SELECT fk_personne, date_prendre_rdv, 
+        strsql_film_selected = """SELECT id_service, nom_technique_service, 
          GROUP_CONCAT(id_genre) as GenresFilms FROM t_genre_film
                                         INNER JOIN t_prendre_rdv ON t_prendre_rdv.fk_personne = t_genre_film.fk_film
                                         INNER JOIN t_genre ON t_genre.id_genre = t_genre_film.fk_genre
