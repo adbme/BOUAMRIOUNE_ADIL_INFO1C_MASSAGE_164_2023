@@ -1,10 +1,23 @@
--- Destruction de la BD si elle existe.
-  -- Pour être certain d'avoir la dernière version des données
-  DROP DATABASE IF EXISTS bouamrioune_adil_info1c_massage_164_2023;
-  -- Création d'une nouvelle base de données
-  CREATE DATABASE IF NOT EXISTS bouamrioune_adil_info1c_massage_164_2023;
-  -- Utilisation de cette base de données
-  USE bouamrioune_adil_info1c_massage_164_2023;
+-- --------------------------------------------------------
+-- Hôte:                         127.0.0.1
+-- Version du serveur:           8.0.30 - MySQL Community Server - GPL
+-- SE du serveur:                Win64
+-- HeidiSQL Version:             12.1.0.6537
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+-- Listage de la structure de la base pour bouamrioune_adil_info1c_massage_164_2023
+CREATE DATABASE IF NOT EXISTS `bouamrioune_adil_info1c_massage_164_2023` /*!40100 DEFAULT CHARACTER SET latin1 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `bouamrioune_adil_info1c_massage_164_2023`;
 
 -- Listage de la structure de table bouamrioune_adil_info1c_massage_164_2023. t_film
 CREATE TABLE IF NOT EXISTS `t_film` (
