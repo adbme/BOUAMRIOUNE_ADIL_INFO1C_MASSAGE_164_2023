@@ -18,6 +18,30 @@
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
 					</p>
+
+                <p>
+						{{ form.prenom_personne.label }}<br>
+						{{ form.prenom_personne(size=32) }}<br>
+						{% for error in form.prenom_personne.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
+					</p>
+
+                <p>
+						{{ form.fk_mail.label }}<br>
+						{{ form.fk_mail(size=32) }}<br>
+						{% for error in form.fk_mail.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
+					</p>
+
+                <p>
+						{{ form.fk_tel.label }}<br>
+						{{ form.fk_tel(size=32) }}<br>
+						{% for error in form.fk_tel.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
+					</p>
 				</div>
 				{{ form.submit(class="btn btn-primary") }}
 			</form>

@@ -4,14 +4,36 @@
 -- SE du serveur:                Win64
 -- HeidiSQL Version:             12.1.0.6537
 -- --------------------------------------------------------
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Destruction de la BD si elle existe.
-  -- Pour être certain d'avoir la dernière version des données
-  DROP DATABASE IF EXISTS bouamrioune_adil_info1c_massage_164_2023;
-
+DROP DATABASE IF EXISTS bouamrioune_adil_info1c_massage_164_2023;
 -- Listage de la structure de la base pour bouamrioune_adil_info1c_massage_164_2023
 CREATE DATABASE IF NOT EXISTS `bouamrioune_adil_info1c_massage_164_2023` /*!40100 DEFAULT CHARACTER SET latin1 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `bouamrioune_adil_info1c_massage_164_2023`;
+
+-- Listage de la structure de table bouamrioune_adil_info1c_massage_164_2023. t_personne
+CREATE TABLE IF NOT EXISTS `t_personne` (
+  `id_personne` int NOT NULL AUTO_INCREMENT,
+  `nom_personne` varchar(50) DEFAULT NULL,
+  `prenom_personne` varchar(50) DEFAULT NULL,
+  `fk_mail` int DEFAULT NULL,
+  `fk_tel` int DEFAULT NULL,
+  PRIMARY KEY (`id_personne`),
+  KEY `fk_mail` (`fk_mail`),
+  KEY `fk_tel` (`fk_tel`),
+  CONSTRAINT `t_personne_ibfk_1` FOREIGN KEY (`fk_mail`) REFERENCES `t_mail` (`id_mail`),
+  CONSTRAINT `t_personne_ibfk_2` FOREIGN KEY (`fk_tel`) REFERENCES `t_tel` (`id_tel`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+
+
 
 -- Listage de la structure de table bouamrioune_adil_info1c_massage_164_2023. t_film
 CREATE TABLE IF NOT EXISTS `t_film` (
@@ -67,21 +89,8 @@ INSERT INTO `t_mail` (`id_mail`, `adresse_email`) VALUES
 	(3, 'mike#example.com'),
 	(4, 'sarah@example.com');
 
--- Listage de la structure de table bouamrioune_adil_info1c_massage_164_2023. t_personne
-CREATE TABLE IF NOT EXISTS `t_personne` (
-  `id_personne` int NOT NULL AUTO_INCREMENT,
-  `nom_personne` varchar(50) DEFAULT NULL,
-  `prenom_personne` varchar(50) DEFAULT NULL,
-  `fk_mail` int DEFAULT NULL,
-  `fk_tel` int DEFAULT NULL,
-  PRIMARY KEY (`id_personne`),
-  KEY `fk_mail` (`fk_mail`),
-  KEY `fk_tel` (`fk_tel`),
-  CONSTRAINT `t_personne_ibfk_1` FOREIGN KEY (`fk_mail`) REFERENCES `t_mail` (`id_mail`),
-  CONSTRAINT `t_personne_ibfk_2` FOREIGN KEY (`fk_tel`) REFERENCES `t_tel` (`id_tel`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table bouamrioune_adil_info1c_massage_164_2023.t_personne : ~4 rows (environ)
+-- Listage des données de la table bouamrioune_adil_info1c_massage_164_2023.t_personne : ~5 rows (environ)
 INSERT INTO `t_personne` (`id_personne`, `nom_personne`, `prenom_personne`, `fk_mail`, `fk_tel`) VALUES
 	(1, 'david', 'lescramptés', 1, 1),
 	(2, 'doe', 'jone', 2, 2),
@@ -118,14 +127,15 @@ CREATE TABLE IF NOT EXISTS `t_service` (
   PRIMARY KEY (`id_service`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table bouamrioune_adil_info1c_massage_164_2023.t_service : ~0 rows (environ)
+-- Listage des données de la table bouamrioune_adil_info1c_massage_164_2023.t_service : ~6 rows (environ)
 INSERT INTO `t_service` (`id_service`, `nom_technique_service`) VALUES
 	(1, 'Reiki'),
 	(2, 'Réflexologie'),
 	(3, 'Massage 3'),
 	(4, 'Massage 4'),
 	(5, 'massage 5'),
-	(6, 'massage 6');
+	(6, 'massage 6'),
+	(7, 'massage 7');
 
 -- Listage de la structure de table bouamrioune_adil_info1c_massage_164_2023. t_tel
 CREATE TABLE IF NOT EXISTS `t_tel` (

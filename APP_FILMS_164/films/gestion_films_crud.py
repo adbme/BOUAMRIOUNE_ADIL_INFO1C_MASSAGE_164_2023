@@ -132,10 +132,10 @@ def film_update_wtf():
             form_update_film.nom_film_update_wtf.data = data_film["date_prendre_rdv"]
 
             # Debug simple pour contrôler la valeur dans la console "run" de PyCharm
-            print(f" duree film  ", data_film["duree_film"], "  type ", type(data_film["duree_film"]))
-            form_update_film.description_film_update_wtf.data = data_film["description_film"]
-            form_update_film.cover_link_film_update_wtf.data = data_film["cover_link_film"]
-            form_update_film.datesortie_film_update_wtf.data = data_film["date_sortie_film"]
+            # print(f" duree film  ", data_film["duree_film"], "  type ", type(data_film["duree_film"]))
+            # form_update_film.description_film_update_wtf.data = data_film["description_film"]
+            # form_update_film.cover_link_film_update_wtf.data = data_film["cover_link_film"]
+            # form_update_film.datesortie_film_update_wtf.data = data_film["date_sortie_film"]
 
     except Exception as Exception_film_update_wtf:
         raise ExceptionFilmUpdateWtf(f"fichier : {Path(__file__).name}  ;  "

@@ -4,7 +4,7 @@
     Gestion des formulaires avec WTF
 """
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField
+from wtforms import StringField, DateField, IntegerField
 from wtforms import SubmitField
 from wtforms.validators import Length, InputRequired, DataRequired
 from wtforms.validators import Regexp
@@ -23,6 +23,13 @@ class FormWTFAjouterGenres(FlaskForm):
                                                                                   "d'espace à double, de double "
                                                                                   "apostrophe, de double trait union")
                                                                    ])
+    prenom_personne = StringField("Prenom")
+
+    fk_mail = IntegerField("fk mail")
+    fk_tel = IntegerField("fk tel")
+
+
+
     submit = SubmitField("Enregistrer genre")
 
 
