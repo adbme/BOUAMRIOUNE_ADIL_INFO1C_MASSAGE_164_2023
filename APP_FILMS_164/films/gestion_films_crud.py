@@ -102,7 +102,7 @@ def film_update_wtf():
                                           }
             print("valeur_update_dictionnaire ", valeur_update_dictionnaire)
 
-            str_sql_update_nom_film = """UPDATE t_prendre_rdv SET date_prendre_rdv = %(value_nom_film)s,
+            str_sql_update_nom_film = """UPDATE t_service SET nom_technique_service = %(value_nom_film)s,
                                                            
                                                             description_film = %(value_description_film)s,
                                                             cover_link_film = %(value_cover_link_film)s,
@@ -119,17 +119,17 @@ def film_update_wtf():
             return redirect(url_for('films_genres_afficher', id_film_sel=id_film_update))
         elif request.method == "GET":
             # Opération sur la BD pour récupérer "fk_personne" et "intitule_genre" de la "t_genre"
-            str_sql_id_film = "SELECT * FROM t_prendre_rdv"
+            str_sql_id_film = "SELECT * FROM t_service"
             valeur_select_dictionnaire = {"value_id_film": id_film_update}
             with DBconnection() as mybd_conn:
                 mybd_conn.execute(str_sql_id_film, valeur_select_dictionnaire)
             # Une seule valeur est suffisante "fetchone()", vu qu'il n'y a qu'un seul champ "nom genre" pour l'UPDATE
             data_film = mybd_conn.fetchone()
             print("data_film ", data_film, " type ", type(data_film), " genre ",
-                  data_film["date_prendre_rdv"])
+                  data_film["nom_technique_service"])
 
             # Afficher la valeur sélectionnée dans le champ du formulaire "film_update_wtf.html"
-            form_update_film.nom_film_update_wtf.data = data_film["date_prendre_rdv"]
+            form_update_film.nom_film_update_wtf.data = data_film["nom_technique_service"]
 
             # Debug simple pour contrôler la valeur dans la console "run" de PyCharm
             # print(f" duree film  ", data_film["duree_film"], "  type ", type(data_film["duree_film"]))
