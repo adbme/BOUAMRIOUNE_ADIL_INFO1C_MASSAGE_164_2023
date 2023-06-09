@@ -212,7 +212,7 @@ def film_delete_wtf():
 
             # Requête qui affiche le film qui doit être efffacé.
             id = int(id_film_delete)
-            str_sql_genres_films_delete = """SELECT * FROM t_prendre_rdv WHERE id = %s"""
+            str_sql_genres_films_delete = """SELECT * FROM t_service WHERE id_service = %s"""
 
             with DBconnection() as mydb_conn:
                 mydb_conn.execute(str_sql_genres_films_delete, id)
