@@ -103,12 +103,30 @@ def genres_ajouter_wtf():
             if form.validate_on_submit():
                 name_genre_wtf = form.nom_genre_wtf.data
                 name_genre = name_genre_wtf.lower()
-                valeurs_insertion_dictionnaire = {"value_intitule_genre": name_genre}
+
+                prenom_personne_wtf = form.prenom_personne.data
+
+
+                fk_mail_wtf = form.fk_mail.data
+
+
+                fk_tel_wtf = form.fk_tel.data
+
+
+
+
+
+                valeurs_insertion_dictionnaire = {"value_intitule_genre": name_genre,
+                                                  "value_prenom" : prenom_personne_wtf,
+                                                  "value_fk_mail": fk_mail_wtf,
+                                                  "value_fk_tel": fk_tel_wtf
+                                                  }
                 print("valeurs_insertion_dictionnaire ", valeurs_insertion_dictionnaire)
 
-                strsql_inserpersonne = """INSERT INTO t_personne (id_personne, nom_personne, prenom_personne, fk_mail, fk_tel) VALUES (NULL,%(value_intitule_genre)s) """
+                strsql_insert_genre = """INSERT INTO t_personne (id_personne, nom_personne, prenom_personne, fk_mail, fk_tel)
+                                         VALUES (NULL, %(value_intitule_genre)s, %(value_prenom)s, %(value_fk_mail)s, %(value_fk_tel)s) """
                 with DBconnection() as mconn_bd:
-                    mconn_bd.execute(strsql_inserpersonne, valeurs_insertion_dictionnaire)
+                    mconn_bd.execute(strsql_insert_genre, valeurs_insertion_dictionnaire)
 
                 flash(f"Données insérées !!", "success")
                 print(f"Données insérées !!")
