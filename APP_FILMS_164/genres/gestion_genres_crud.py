@@ -167,6 +167,7 @@ def genre_update_wtf():
     # L'utilisateur vient de cliquer sur le bouton "EDIT". Récupère la valeur de "id_genre"
     id_genre_update = request.values['id_genre_btn_edit_html']
 
+    print("id genre " + id_genre_update)
     # Objet formulaire pour l'UPDATE
     form_update = FormWTFUpdateGenre()
     try:
@@ -174,18 +175,26 @@ def genre_update_wtf():
         if form_update.validate_on_submit():
             # Récupèrer la valeur du champ depuis "genre_update_wtf.html" après avoir cliqué sur "SUBMIT".
             # Puis la convertir en lettres minuscules.
-            name_genre_update = form_update.nom_genre_update_wtf.data
-            name_genre_update = name_genre_update.lower()
-            date_genre_essai = form_update.date_genre_wtf_essai.data
+            # name_genre_update = form_update.nom_genre_update_wtf.data
+            # name_genre_update = name_genre_update.lower()
+            # date_genre_essai = form_update.date_genre_wtf_essai.data
+
+            nom_personne = form_update.nom_genre_wtf.data
+            prenom_personne = form_update.prenom_personne.data
+            fk_mail = form_update.fk_mail.data
+            fk_tel = form_update.fk_tel.data
+
 
             valeur_update_dictionnaire = {"value_id_genre": id_genre_update,
-                                          "value_name_genre": name_genre_update,
-                                          "value_date_genre_essai": date_genre_essai
+                                          "value_nom_personne": nom_personne,
+                                          "value_prenom_personne": prenom_personne,
+                                          "value_fk_mail": fk_mail,
+                                          "value_fk_tel": fk_tel
                                           }
             print("valeur_update_dictionnaire ", valeur_update_dictionnaire)
 
-            str_sql_update_intitulegenre = """UPDATE t_personne SET nom_personne = %(value_name_genre)s, 
-            nom_personne = %(value_date_genre_essai)s WHERE id_personne = %(value_id_genre)s """
+
+            str_sql_update_intitulegenre = """UPDATE t_personne SET nom_personne = %(value_nom_personne)s, prenom_personne = %(value_prenom_personne)s, fk_mail = %(value_fk_mail)s, fk_tel = %(value_fk_tel)s WHERE id_personne = %(value_id_genre)s """
             with DBconnection() as mconn_bd:
                 mconn_bd.execute(str_sql_update_intitulegenre, valeur_update_dictionnaire)
 
@@ -196,20 +205,22 @@ def genre_update_wtf():
             # Affiche seulement la valeur modifiée, "ASC" et l'"id_genre_update"
             return redirect(url_for('genres_afficher', order_by="ASC", id_genre_sel=id_genre_update))
         elif request.method == "GET":
-            # Opération sur la BD pour récupérer "id_genre" et "intitule_genre" de la "t_personne"
-            str_sql_id_genre = "SELECT id_personne FROM t_personne " \
-                               "WHERE nom_personne = %(value_id_genre)s"
-            valeur_select_dictionnaire = {"value_id_genre": id_genre_update}
-            with DBconnection() as mybd_conn:
-                mybd_conn.execute(str_sql_id_genre, valeur_select_dictionnaire)
-            # Une seule valeur est suffisante "fetchone()", vu qu'il n'y a qu'un seul champ "nom genre" pour l'UPDATE
-            data_nom_genre = mybd_conn.fetchone()
-            print("data_nom_genre ", data_nom_genre, " type ", type(data_nom_genre), " genre ",
-                  data_nom_genre["nom_personne"])
+            print("formulaire chargé ")
+            # # Opération sur la BD pour récupérer "id_genre" et "intitule_genre" de la "t_personne"
+            # str_sql_id_genre = "SELECT * FROM t_personne"
+            # valeur_select_dictionnaire = {"value_id_genre": id_genre_update}
+            # with DBconnection() as mybd_conn:
+            #     mybd_conn.execute(str_sql_id_genre, valeur_select_dictionnaire)
+            # # Une seule valeur est suffisante "fetchone()", vu qu'il n'y a qu'un seul champ "nom genre" pour l'UPDATE
+            #
+            #
+            # data_nom_genre = mybd_conn.fetchone()
+            #
+            # print("data_nom_genre ", data_nom_genre, " type ", type(data_nom_genre), " genre ",
+            #       data_nom_genre["nom_personne"])
 
             # Afficher la valeur sélectionnée dans les champs du formulaire "genre_update_wtf.html"
-            form_update.nom_genre_update_wtf.data = data_nom_genre["nom_personne"]
-            form_update.date_genre_wtf_essai.data = data_nom_genre["date_ins_genre"]
+
 
     except Exception as Exception_genre_update_wtf:
         raise ExceptionGenreUpdateWtf(f"fichier : {Path(__file__).name}  ;  "

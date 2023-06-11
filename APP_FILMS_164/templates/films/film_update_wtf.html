@@ -11,8 +11,7 @@
 				<!-- Protection contre les attaques Cross-Site Request Forgery (CSRF) -->
 				{{ form_update_film.hidden_tag() }}
 				<div class="form-group">
-
-                    <p>
+					<p>
 						{{ form_update_film.nom_film_update_wtf.label }}<br>
 						{{ form_update_film.nom_film_update_wtf(cols=50, rows=3) }}<br>
 						{% for error in form_update_film.nom_film_update_wtf.errors %}
