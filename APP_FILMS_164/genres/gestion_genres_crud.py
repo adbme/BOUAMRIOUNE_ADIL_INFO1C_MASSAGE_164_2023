@@ -207,10 +207,10 @@ def genre_update_wtf():
         elif request.method == "GET":
             print("formulaire chargé ")
             # # Opération sur la BD pour récupérer "id_genre" et "intitule_genre" de la "t_personne"
-            # str_sql_id_genre = "SELECT * FROM t_personne"
+            # str_sql_id_genre = "SELECT * FROM t_personne WHERE id_personne = %(id_genre_update)s"
             # valeur_select_dictionnaire = {"value_id_genre": id_genre_update}
             # with DBconnection() as mybd_conn:
-            #     mybd_conn.execute(str_sql_id_genre, valeur_select_dictionnaire)
+            #     mybd_conn.execute(str_sql_id_genre, valeur_select_dictionnaire.get("value_id_genre"))
             # # Une seule valeur est suffisante "fetchone()", vu qu'il n'y a qu'un seul champ "nom genre" pour l'UPDATE
             #
             #

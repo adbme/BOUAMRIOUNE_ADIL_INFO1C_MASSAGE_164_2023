@@ -109,7 +109,7 @@ def film_update_wtf():
             return redirect(url_for('films_genres_afficher', id_film_sel=id_film_update))
         elif request.method == "GET":
             # Opération sur la BD pour récupérer "fk_personne" et "intitule_genre" de la "t_genre"
-            str_sql_id_film = "SELECT * FROM t_service"
+            str_sql_id_film = "SELECT DISTINCT * FROM t_service WHERE id_service = %(value_id_film)s"
             valeur_select_dictionnaire = {"value_id_film": id_film_update}
             with DBconnection() as mybd_conn:
                 mybd_conn.execute(str_sql_id_film, valeur_select_dictionnaire)
